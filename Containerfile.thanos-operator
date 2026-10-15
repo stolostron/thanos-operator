@@ -1,5 +1,7 @@
-# Build the manager binary
-FROM quay.io/redhat-services-prod/openshift/boilerplate:image-v8.4.1 as builder
+# Copyright Contributors to the Open Cluster Management project
+# Licensed under the Apache License 2.0
+
+FROM registry.redhat.io/openshift/golang-builder:golang-builder-v1.26-rhel9 AS builder
 ARG TARGETOS
 ARG TARGETARCH
 
@@ -37,15 +39,14 @@ ENTRYPOINT ["/manager"]
 
 ARG VERSION
 
-LABEL org.label-schema.vendor="Red Hat" \
-  vendor="Red Hat, Inc." \
-  com.redhat.component="rhobs-thanos-operator" \
-  name="thanos-operator" \
-  maintainer="team-monitoring@redhat.com" \
-  version="$VERSION" \
-  release="$VERSION" \
-  description="The Thanos Operator provides Kubernetes native deployment and management of Thanos components. The purpose of this project is to simplify and automate the configuration of a Thanos based monitoring stack that would work across different topologies and deployment modes." \
-  io.k8s.description="The Thanos Operator provides Kubernetes native deployment and management of Thanos components. The purpose of this project is to simplify and automate the configuration of a Thanos based monitoring stack that would work across different topologies and deployment modes." \
-  summary="Operator to manage Thanos installations" \
-  url="https://github.com/rhobs/rhobs-konflux-thanos-operator" \
-  distribution-scope="restricted"
+LABEL com.redhat.component="thanos" \
+  url="https://github.com/stolostron/thanos-operator" \
+  name="rhacm2/thanos-operator-rhel9" \
+  cpe="cpe:/a:redhat:acm:5.1::el9" \
+  summary="thanos" \
+  io.openshift.expose-services="" \
+  io.openshift.tags="data,images" \
+  io.k8s.display-name="thanos-operator" \
+  maintainer="" \
+  description="thanos-operator" \
+  io.k8s.description="thanos-operator"
